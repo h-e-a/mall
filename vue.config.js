@@ -11,6 +11,15 @@ module.exports={
             .set('network',resolve('src/network'))
             .set('views',resolve('src/views'))
             .set('components',resolve('src/components'))
+
+    },
+    pluginOptions:{
+        'style-resources-loader': {
+            preProcessor: 'less',
+            patterns: [
+                path.resolve(__dirname, './src/assets/style/varibles.less')
+            ]
+        }
     }
 }
 
