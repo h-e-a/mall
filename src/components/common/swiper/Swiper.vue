@@ -17,18 +17,22 @@
   export default {
     name: "Swiper",
     props: {
+      //轮播间隔
       interval: {
         type: Number,
         default: 3000
       },
+
       animDuration: {
         type: Number,
         default: 300
       },
+      //比例
       moveRatio: {
         type: Number,
         default: 0.25
       },
+      //指示器
       showIndicator: {
         type: Boolean,
         default: true

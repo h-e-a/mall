@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap" refs="aaaa">
+  <div class="wrap" ref="aaaa">
     <ul class="content">
       <li>列表1</li>
       <li>列表2</li>
@@ -219,9 +219,22 @@
 
       },
       mounted() {
-        this.scroll=  new BScroll(document.querySelector('.wrap'),{
+        this.bs=  new BScroll(this.$refs.aaaa,{
+        probeType:3,
+        click: true,
+        pullUpLoad:true
+        })
+        this.bs.on('scroll',(position)=>{
+          console.log(position)
+        })
+        //下拉刷新
+        this.bs.on('pullingUp',()=>{
 
         })
+
+      },
+      methods(){
+
       }
     }
 </script>
