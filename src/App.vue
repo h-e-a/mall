@@ -1,9 +1,11 @@
 <template>
   <div id="app">
-<!--    <img alt="Vue logo" src="~assets/logo.png">-->
-    <router-view/>
-    <main-tab-bar class="main-tab-bar"/>
+    <keep-alive exclude="Detail">
+<!--      exclude 去除这个页面的保持状态-->
+        <router-view/>
+    </keep-alive>
 
+    <main-tab-bar class="main-tab-bar"/>
   </div>
 </template>
 

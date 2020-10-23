@@ -1,13 +1,14 @@
 <template>
     <div id="home" class="wrapper">
         <nav-bar class="home-nav"><div slot="center">Go物</div></nav-bar>
-        <scroll ref="backTop" @isShow="isShowBackTop" @pullingUp="loadMore">
-            <home-swiper :banners="banners"/>
+        <scroll ref="scroll" @isShow="isShowBackTop" @pullingUp="loadMore">
+            <home-swiper :banners="banners" @swiperImageLoad="swiperImageLoad"/>
             <recommend-view :recommends="recommends" />
             <feature-view/>
             <tab-control class="tab-control"
                          :titles="['流行','新款','流行']"
-                         @tabClick="tabClick"/>
+                         @tabClick="tabClick"
+            ref="tabControl"/>
             <goods-list :goods="showGoods" class="goods-list"/>
         </scroll>
         <back-top  class="back-top" @click.native="onClick()" v-show="isShow"/>
@@ -60,7 +61,15 @@
                 currentType:'pop',
                 scrollTop:null,
                 isShow:false,
+                tabOffsetTop:0,
+                saveY:0,
             }
+        },
+        activated() {
+            this.$refs.scroll.stayScroll(this.saveY)
+        },
+        deactivated() {
+             this.saveY=this.$refs.scroll.scrollTop
         },
         created() {
             this.getHomeMultidata()
@@ -89,13 +98,16 @@
             },
             onClick(){
                 //点击回到顶部
-                this.$refs.backTop.toTop(50)
+                this.$refs.scroll.toTop(50)
             },
             isShowBackTop(isShow){
                this.isShow=isShow
             },
             loadMore(){
                 this.getHomeGoods(this.currentType)
+            },
+            swiperImageLoad(){
+             this.tabOffsetTop = this.$refs.tabControl.$el.offsetTop;
             },
 
             /**

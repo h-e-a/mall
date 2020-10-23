@@ -1,6 +1,5 @@
 <template>
   <tab-bar>
-
     <tab-bar-item path="/home" activeColor="red">
       <img slot="item-icon" src="~assets/img/tabbar/icon01.png"  alt=""/>
       <img slot="item-active-icon" src="~assets/img/tabbar/icon01_active.png" alt=""/>

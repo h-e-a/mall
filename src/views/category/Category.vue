@@ -229,13 +229,8 @@
         })
         //下拉刷新
         this.bs.on('pullingUp',()=>{
-
         })
-
       },
-      methods(){
-
-      }
     }
 </script>
 
