@@ -11,7 +11,7 @@
             ref="tabControl"/>
             <goods-list :goods="showGoods" class="goods-list"/>
         </scroll>
-        <back-top  class="back-top" @click.native="onClick()" v-show="isShow"/>
+        <back-top class="detail-back-top"  @click.native="onClick()" v-show="isShow"/>
     </div>
 </template>
 
@@ -19,16 +19,15 @@
     import NavBar from "components/common/navbar/NavBar";
     import TabControl from "components/content/tabControl/TabControl";
     import GoodsList from "components/content/goods/GoodsList";
-    import BackTop from "components/content/backTop/BackTop";
 
+    import Scroll from "components/common/scroll/Scroll";
 
     import HomeSwiper from "./childComps/HomeSwiper";
     import RecommendView from "./childComps/RecommendView";
     import FeatureView from "./childComps/FeatureView";
 
     import {getHomeMultidata,getHomeGoods} from "network/home";
-    import Scroll from "../../components/common/scroll/Scroll";
-
+    import {backTopMixin} from "common/mixin";
 
 
     export default {
@@ -38,7 +37,6 @@
             NavBar,
             TabControl,
             GoodsList,
-            BackTop,
 
             HomeSwiper,
             RecommendView,
@@ -49,6 +47,7 @@
                 return this.goods[this.currentType].list
             }
         },
+        mixins:[backTopMixin],
         data(){
             return{
              banners:[],
@@ -60,7 +59,7 @@
                 },
                 currentType:'pop',
                 scrollTop:null,
-                isShow:false,
+                // isShow:false,
                 tabOffsetTop:0,
                 saveY:0,
             }
@@ -86,23 +85,16 @@
              switch (index) {
                  case 0:
                      this.currentType='pop'
-                     break
+                     break;
                  case 1:
                      this.currentType='new'
-                     break
+                     break;
                  case 2:
                      this.currentType='sell'
-                     break
+                     break;
              }
-
             },
-            onClick(){
-                //点击回到顶部
-                this.$refs.scroll.toTop(50)
-            },
-            isShowBackTop(isShow){
-               this.isShow=isShow
-            },
+            //加载更多
             loadMore(){
                 this.getHomeGoods(this.currentType)
             },
@@ -153,14 +145,6 @@
     .goods-list{
        margin-bottom: 49px;
     }
-    .content{
-        position: absolute;
-        top: 44px;
-        bottom: 49px;
-        left: 0;
-        right: 0;
-    }
-
 
 
 </style>

@@ -8,15 +8,17 @@
             <span class="discount" v-if="goods.discount">{{goods.discount}}</span>
         </div>
         <div class="info-other">
-            <span v-for="item in goods.columns">{{item}}</span>
+            <span v-for="(item ,index) in goods.columns" :key="index">{{item}}</span>
         </div>
         <div class="info-service">
-            <span class="info-services-item" v-for=" (item,index) in goods.services"
-                  :key="index"
-                  v-if="index==goods.services.length-1||index==goods.services.length-2">
+            <template v-for=" (item,index) in goods.services" >
+                <span class="info-services-item"
+                      :key="index"
+                      v-if="index==goods.services.length-1||index==goods.services.length-2">
                 <img :src="goods.services[index].icon">
                 <span>{{goods.services[index].name}}</span>
             </span>
+            </template>
 <!--            v-if判断服务器传过来的数据 只显示数组中最后的两项index-->
         </div>
     </div>

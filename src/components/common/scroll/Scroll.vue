@@ -19,7 +19,7 @@
         },
         methods:{
             getScroll(){
-                // 获取页面页面的滚动高度
+                // 获取页面的滚动高度
                 this.scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
                 // 获取页面的可视高度
                 let clientHeight = document.documentElement.clientHeight || document.body.clientHeight
@@ -27,10 +27,13 @@
                 this.scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
                 //当滚动大于1000时候给父组件返回一个参数用来显示时候能返回顶部的按钮
                 this.scrollTop>1000? this.$emit('isShow',true):this.$emit('isShow',false)
+                ///监听页面滚动的位置并返回给父组件
+                this.$emit('scrollListened',this.scrollTop)
                 //判断是否滑动到屏幕底部
                 if(this.scrollTop + clientHeight == this.scrollHeight){
                     this.$emit('pullingUp')
                 }
+
             },
             ///回到顶部方法
             toTop(i=50){
@@ -46,7 +49,12 @@
             stayScroll(height){
                 document.documentElement.scrollTop =height;
              },
+            ///点击切换到指定高度的方法
+            scrollTo(toHeight){
+                document.documentElement.scrollTop=toHeight;
             },
+            },
+
 
         mounted() {
             window.addEventListener('scroll', this.getScroll);

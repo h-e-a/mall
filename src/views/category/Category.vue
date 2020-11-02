@@ -225,7 +225,6 @@
         pullUpLoad:true
         })
         this.bs.on('scroll',(position)=>{
-          console.log(position)
         })
         //下拉刷新
         this.bs.on('pullingUp',()=>{
