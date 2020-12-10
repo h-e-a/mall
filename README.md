@@ -1,5 +1,7 @@
 # mall
 
+##商场项目练习 vue
+
 ## Project setup
 ```
 npm install
