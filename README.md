@@ -1,6 +1,7 @@
 # mall
 
-##商场项目练习 vue
+## 商场项目练习
+### Vue
 
 ## Project setup
 ```
